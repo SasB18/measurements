@@ -3,8 +3,8 @@ Created on Tue Sep 24 2022
 
 @author: sasb
 
-Egy könyvtár, amely használható labor méréseinek kiértékelésére, hibák terjedésének kiszámolására, szimbolikus 
-egyenletek megadására, függvények illesztésére, stb.
+A python library for my physics lab course.
+It can compute average, standard deviation, error spread, plot as fit functions.
 """
 
 import numpy as np
@@ -15,16 +15,22 @@ import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 
 def meas(array, alpha=0.025, outp=False, unit="", ddof=1):
-    """Megadja egy mérési eredmény középértékét és eltérését.
-    Paraméterek:
-        -array: lista amelyben a mérés eredményei szerepelnek.
-        -alpha: float, opcionális, megadja a szignifikancia szintet. Alap értéke alpha=0,025.
-        -outp: boolean, opcionális, ha outp=True akkor kiírja az értéket a terminálba.
-        -unit: string, opcionális, outp=True esetén mértékegységet is ír.
-    Visszaad:
+    """Return the average and deviation of a measurement.
+    Parameters:
+        -array:
+            array of the measurement results.
+        -alpha:
+            float, optional, default value alpha=0,025, significance percent of measurement.
+        -outp:  
+            boolean, optional, if outp=True, then it prints out the result in terminal.
+        -unit:
+            string, optional, if outp=True, then it also prints the unit.
+    Returns:
         Tuple.
     Dependencies:
-        Numpy, scipy."""
+        Numpy, scipy.
+    Raises:
+        -"""
         
     mean = np.mean(array)
     N = np.shape(array)
@@ -36,18 +42,20 @@ def meas(array, alpha=0.025, outp=False, unit="", ddof=1):
     return mean, dev
 
 def error_spread(model, params, arrays):
-    """Kiszámolja a hibaterjedését egy függő mennyiségnek egy modell alapján. A sympy könyvtár szimbolikus deriválását
-    használva deriválja a modellt, majd kiértékeli a mért mennyiségek középértékénél.
-    Paraméterek:
-        -model: Modell/képlet amely alapján számolja a hibaterjedést. Úgy kell megadni, hogy a sympy
-        kifejezhető összefüggéssé tudja alakítani.
-        -params: Az egyenletben szereplő paraméterek listája stringként. Ezek azok a paraméterek amelyek szerint le fogja
-        deriválni a modellt.
-        -arrays: Az adathalmazok listája. Ebből meghatározza a középértékeket és az eltéréseket is.
-    Visszaad:
-        float, a függő mennyiség hibája
+    """Calcualtes error spread from a model using sympy.
+    Parameters:
+        -model:
+            string, model/formula that is used to calculate partial derivatives.
+        -params:
+            array of strings, array of parameters in the model equation.
+        -arrays:
+            array, array of measurement results.
+    Return:
+        float, spreaded error
     Dependencies:
-        Sympy."""
+        Sympy.
+    Raises:
+        -"""
     
     values = {}
     for i in range(len([params])):
@@ -67,25 +75,31 @@ def error_spread(model, params, arrays):
     return np.linalg.norm(x)
 
 def plot(x, y, model=None, params=None, title=None, x_label=None, y_label=None, full_output=False):
-    """Egy mérési eredményt ábrázol grafikonon hibasávval.
+    """Plots measurement results.
     Paraméterek:
-        -x: az x tengely értékei
-        -y: az y tengely értékei (mért eredmények)
-        -model: opcionális, ha függvényillesztést szeretne csinálni, akkor meg kell adni egy modellt, amely alapján
-        végezné az illesztést. (Jelenleg csak egyenest tud)
-        -params: opcionális, ha függvényilleszészt szeretne csinálni, akkor ebbe a paraméterbe kell listaként megadni
-        a modellben szereplő változókat. Fontos, hogy 
-        -title: opcionális, címet ad a grafikonnak
-        -x_label: opcionális, címkét as az x tengelynek
-        -y_label: opcionális, címkét ad az y tengelynek
+        -x:
+            array, x values
+        -y:
+            array, y values
+        -model:
+            string, optional, if we want to fit a function, we must give a model that is used for the fitting
+        -params:
+            array of strings, optional, if we want to fit a function, we must give an array of strings, that contain the parameters in the
+            fitting model.
+        -title:
+            optional, title of plot
+        -x_label:
+            string, optional, label of x axis
+        -y_label:
+            string, optional, label of y axis
     Visszaad:
         -matplotlib.plot()
         -popt: optimális paraméterek az illeszéshez
         -perr: az illesztéshez használt paraméterek szórása (jelenleg nem működik)
     Dependencies:
         Numpy, matplotlib, scipy, sympy
-    Probléma:
-        A sympy.lambdify miatt nem tudja kiszámolni a kovarianciamátrixot."""
+    Current error:
+        It can not compute the covariance matrix."""
         
     y_avg = np.array([np.mean(i) for i in y])
     error = np.array([meas(i)[1] for i in y])
@@ -107,23 +121,7 @@ def plot(x, y, model=None, params=None, title=None, x_label=None, y_label=None, 
     perr = np.sqrt(np.diag(pcov))
     
     if full_output:
-        print("Az illesztett függvény paraméterei:")
+        print("fitted function parameters:")
         print([" " + params[i+1] + "=" + str("%.3f" % popt[i]) for i in range(len(params)-1)])
     
     return popt, perr, pcov
-
-
-if __name__ == "__main__":
-    """ Példák a fent definiált függvényekre """
-    
-    # HIBATERJEDÉS
-    model = "T**2+y**3"
-    z = error_spread(model, ["T", "y"], [[2, 2.3, 2.2], [1, 1.2, 0.9]])    
-    
-    # FÜGGVÉNYILLESZTÉS
-    # x = np.array([1, 2, 3, 4])
-    # y = np.array([[1.1, 1.2, 0.8], [3.87, 4.03, 4.4], [9, 9.1, 8.7], [16.2, 16.3, 16.8]])
-    # f = "exp(a*x-b)*c+d" # Innen folytatni (modell megadása és illesztés)
-    # popt, perr, pcov = plot(x, y, model=f, params=["x", "a", "b", "c", "d"], full_output=True)
-
-    pass
