@@ -74,7 +74,7 @@ def error_spread(model, params, arrays):
 
 def plot(x, y, model=None, params=None, title=None, x_label=None, y_label=None, full_output=False):
     """Plots measurement results.
-    Paraméterek:
+    Parameters:
         -x:
             array, x values
         -y:
@@ -90,7 +90,7 @@ def plot(x, y, model=None, params=None, title=None, x_label=None, y_label=None, 
             string, optional, label of x axis
         -y_label:
             string, optional, label of y axis
-    Visszaad:
+    Returns:
         -matplotlib.plot()
         -popt: optional parameters for fit
         -perr: error of fit parameters (not working)
