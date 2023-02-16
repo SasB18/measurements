@@ -3,3 +3,21 @@ Change Log
 version 0.0.1 02/10/2022
 ----------
 first release
+==========
+version 0.0.2 02/10/2022
+----------
+rearranged libraries for further projects
+==========
+version 0.0.3 02/10/2022
+----------
+changed the files back
+==========
+version 0.0.4 10/10/2022
+----------
+Added functions, added 'fit' function to fit
+specific functions on dataset. 'plot' will now
+return r_squared.
+'plot' is broken, may be deleted later.
+----------
+Added linear lambda, output function and
+function to calculate R^2
