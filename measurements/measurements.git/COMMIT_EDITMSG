@@ -1,0 +1,41 @@
+Created git repository
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch master
+#
+# Initial commit
+#
+# Changes to be committed:
+#	new file:   build/lib/measurements/__init__.py
+#	new file:   build/lib/measurements/functions.py
+#	new file:   build/lib/measurements/meas.py
+#	new file:   build/lib/measurements/measurements.py
+#	new file:   dist/measurements-0.0.3-py3-none-any.whl
+#	new file:   dist/measurements-0.0.4-py3-none-any.whl
+#	new file:   dist/measurements-0.0.5-py3-none-any.whl
+#	new file:   dist/measurements-0.0.5.1-py3-none-any.whl
+#	new file:   dist/measurements-0.0.5.2-py3-none-any.whl
+#	new file:   dist/measurements-0.0.5.3-py3-none-any.whl
+#	new file:   dist/measurements-0.0.5.4-py3-none-any.whl
+#	new file:   dist/measurements-0.0.5.5-py3-none-any.whl
+#	new file:   dist/measurements-0.0.5.6-py3-none-any.whl
+#	new file:   dist/measurements-0.0.5.7-py3-none-any.whl
+#	new file:   dist/measurements-0.0.5.8-py3-none-any.whl
+#	new file:   dist/measurements-0.0.6-py3-none-any.whl
+#	new file:   measurements.egg-info/PKG-INFO
+#	new file:   measurements.egg-info/SOURCES.txt
+#	new file:   measurements.egg-info/dependency_links.txt
+#	new file:   measurements.egg-info/requires.txt
+#	new file:   measurements.egg-info/top_level.txt
+#	new file:   measurements/CHANGELOG.txt
+#	new file:   measurements/LICENSE.txt
+#	new file:   measurements/MANIFEST.in
+#	new file:   measurements/README.txt
+#	new file:   measurements/__init__.py
+#	new file:   measurements/__pycache__/functions.cpython-310.pyc
+#	new file:   measurements/__pycache__/meas.cpython-310.pyc
+#	new file:   measurements/__pycache__/measurements.cpython-310.pyc
+#	new file:   measurements/functions.py
+#	new file:   setup.py
+#
