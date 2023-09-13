@@ -11,7 +11,7 @@ from sympy.core.sympify import sympify
 from scipy.stats import t
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
-from measurements.functions import *
+#from measurements.functions import *
 
 def meas(array, alpha=0.025, outp=False, unit="", ddof=1):
     """Return the average and deviation of a measurement.
